@@ -16,7 +16,8 @@ import {
   // TabPanels,
   // // popup
   // Popup,
-  // Toast,
+  Toast,
+  Dialog,
   // Picker,
   // CascadePicker,
   // DatePicker,
@@ -39,12 +40,13 @@ import router from './router'
 // Vue.use(Loading)
 // Vue.use(Tip)
 // Vue.use(Popup)
-// Vue.use(Toast)
+Vue.use(Toast)
 // Vue.use(ActionSheet)
 // Vue.use(Drawer)
 // Vue.use(ImagePreview)
 // Vue.use(Scroll)
 Vue.use(Slide)
+Vue.use(Dialog)
 // Vue.use(IndexList)
 // Vue.use(Swipe)
 // Vue.use(Sticky)

@@ -4,10 +4,10 @@
 	  <div class="contentBox">
 		  <app-header centerTitle="明若清渊"></app-header>
 		  <div class="swiperBox">
-			  <cube-slide ref="slide" class="swiper" :initial-index="1" :loop="false" :auto-play="false">
+			  <cube-slide ref="slide" class="swiper" :initial-index="2" :loop="false" :auto-play="false">
 				<cube-slide-item>
 				  <div class="musicWrpper">
-                     <img src="./love.jpg" alt="">
+              <img src="./love.jpg" alt="">
 				  </div>
 				</cube-slide-item>
 				<cube-slide-item>
@@ -23,7 +23,7 @@
 				</cube-slide-item>
 				<cube-slide-item>
 				  <div class="musicWrpper">
-                     <img src="./test.jpg" alt="">
+              <div>hello world</div>
 				  </div>
 				</cube-slide-item>
 			  </cube-slide>
@@ -38,11 +38,11 @@
 				  <div class="totalTime">{{_format(durationTime)}}</div>
 			  </div>
 			  <div class="buttonBox">
-				  <div class="favorite">
+				  <div class="favorite" @click="favoriteMusic" :class="isLike?'active':''">
 					  <i class="fa fa-heart"></i>
 					  </div>
 				  <div class="controlBox">
-					  <div class="item">
+					  <div class="item" @click="preClick">
 						  <i class="fa fa-backward"></i>
 					  </div>
 					  <div class="item" @click="palyMusic">
@@ -50,10 +50,10 @@
 						  <i class="fa fa-pause" v-show="flag" ></i>
 					  </div>
 					  <div class="item">
-						  <i class="fa fa-forward"></i>
+						  <i class="fa fa-forward" @click="nextClick"></i>
 					  </div>
 				  </div>
-				  <div class="list">
+				  <div class="list" @click="clickMenu">
 					  <li class="fa fa-list"></li>
 				  </div>
 			  </div>
@@ -88,7 +88,8 @@ import { setTimeout } from 'timers';
 				timer: '',
 				currentSongLyric: null,
 				currentLineNum: 0,
-				currentLineText: ''
+				currentLineText: '',
+        isLike: false
 			}
     },
     computed:{
@@ -104,25 +105,30 @@ import { setTimeout } from 'timers';
 				console.log(value)
 			},
 			palyMusic(){
-				if(this.flag){
-					this.$refs.audio.pause()
-           this.flag = false
-           if(this.currentSongLyric){
-             this.currentSongLyric.stop()
-           }
-				}else{
-					if(!this.songReady) return false
-					this.$refs.audio.play()
-					this.flag = true
-					this.getSongLyric()
-					setTimeout(()=> {
-            this.$refs.lyric.refresh()
-          // this.currentSongLyric.seek(this.currentTime * 1000)
-          },200)
-          if(this.currentSongLyric){
-            this.onProgressBarChange(this.percent)
+        if(this.songReady){
+          if(this.flag){
+            this.$refs.audio.pause()
+             this.flag = false
+             if(this.currentSongLyric){
+               this.currentSongLyric.stop()
+             }
+          }else{
+            if(!this.songReady) return false
+            this.$refs.audio.play()
+            this.flag = true
+            this.getSongLyric()
+            // setTimeout(()=> {
+       //        this.$refs.lyric.refresh()
+       //      // this.currentSongLyric.seek(this.currentTime * 1000)
+       //      },200)
+            if(this.currentSongLyric){
+              this.onProgressBarChange(this.percent)
+            }
           }
-				}
+        }else{
+          alert('歌曲缓冲中....')
+        }
+				
 			},
       _showFull() {
             this.flag = true
@@ -186,7 +192,40 @@ import { setTimeout } from 'timers';
           this.$refs.audio.currentTime = 0
           this.percent = 0
           this._pause()
+          this.$refs.lyric.refresh()
+          this.flag = false
+          this.currentSongLyric.stop();
+        },
+        clickMenu(){
+          this.$createDialog({
+          type: 'alert',
+          title: '我的列表',
+          content: '都是你，没有可看的',
+          icon: 'cubeic-like'
+        }).show()
+        },
+        favoriteMusic(){
+          this.isLike = !this.isLike
+        },
+        preClick(){
+          this.$createDialog({
+          type: 'alert',
+          title: '以前',
+          content: '没有早点遇到你，是我的遗憾....',
+          icon: 'cubeic-alert'
+        }).show()
+        },
+        nextClick(){
+                    this.$createDialog({
+          type: 'alert',
+          title: '以后',
+          content: '我在未来，等你！',
+          icon: 'cubeic-vip'
+        }).show()
         }
+  },
+  mounted(){
+    this.getSongLyric()
   },
   watch:{
  
@@ -281,7 +320,7 @@ import { setTimeout } from 'timers';
           right: 0;
           bottom: 0;
           margin: auto;
-          animation: myrotate 8s linear infinite forwards;
+          animation: myrotate 10s linear infinite forwards;
         }
       }
     }
@@ -321,6 +360,9 @@ import { setTimeout } from 'timers';
           line-height: 50px;
           color: #fff;
           font-size: 18px;
+          &.active{
+            color:red;
+          }
         }
         .controlBox {
           flex: 1;

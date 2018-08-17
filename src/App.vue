@@ -20,6 +20,12 @@ export default {
   .cube-slide-dots{
     bottom:10px;
   }
+  .cube-dialog-btn{
+    color:#6f6966!important;
+  }
+  .cubeic-like{
+    color:red!important;
+  }
   .cube-slide-dots>span{
       display:inline-block;
       width:10px!important;

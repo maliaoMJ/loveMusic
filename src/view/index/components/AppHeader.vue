@@ -1,7 +1,7 @@
 <template>
 	<div class="appHeader">
 		<div class="leftBox" @click="leftClick">
-			<i :class="['fa',leftIconName]"></i>
+			<img class="avatarImage" src="../avatar.jpg" alt="">
 		</div>
 		<div class="centerBox"><h5 @click="centerClick">{{centerTitle}}</h5></div>
 		<div class="rightBox" @clcik="rightClick">
@@ -32,8 +32,13 @@
     		this.$emit('goBack')
     	},
     	rightClick(){
-    		this.$emit('goShare')
-    	},
+        this.$createDialog({
+        type: 'alert',
+        title: '我是标题',
+        content: '我是内容',
+        icon: 'cubeic-alert'
+      }).show()
+        },
     	centerClick(){
     		this.$emit('clickTitle')
     	}
@@ -53,6 +58,13 @@
   border-bottom: 1px solid rgba(144, 137, 137, 0.8);
   box-sizing: border-box;
   z-index: 333;
+  .avatarImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 8px auto;
+    border: 2px solid #afa7a7f0;
+  }
   .leftBox,
   .rightBox {
     width: 60px;
