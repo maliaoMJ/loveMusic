@@ -4,7 +4,7 @@
 			<img class="avatarImage" src="../avatar.jpg" alt="">
 		</div>
 		<div class="centerBox"><h5 @click="centerClick">{{centerTitle}}</h5></div>
-		<div class="rightBox" @clcik="rightClick">
+		<div class="rightBox" @click="rightClick">
 			<i :class="['fa',rightIconName]"></i>
 		</div>
 	</div>
@@ -34,9 +34,9 @@
     	rightClick(){
         this.$createDialog({
         type: 'alert',
-        title: '我是标题',
-        content: '我是内容',
-        icon: 'cubeic-alert'
+        title: '分享',
+        content: '你(BUG)的(有)专(点)属(多)^_^~',
+        icon: 'cubeic-smile'
       }).show()
         },
     	centerClick(){

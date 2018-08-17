@@ -4,7 +4,7 @@
 	  <div class="contentBox">
 		  <app-header centerTitle="明若清渊"></app-header>
 		  <div class="swiperBox">
-			  <cube-slide ref="slide" class="swiper" :initial-index="2" :loop="false" :auto-play="false">
+			  <cube-slide ref="slide" class="swiper" :initial-index="0" :loop="false" :auto-play="false">
 				<cube-slide-item>
 				  <div class="musicWrpper">
               <img src="./love.jpg" alt="">
@@ -23,7 +23,13 @@
 				</cube-slide-item>
 				<cube-slide-item>
 				  <div class="musicWrpper">
-              <div>hello world</div>
+              <div class="introduce">
+                <h3>LETTER FOR YOU</h3>
+                <span class="text">今天，我看了一下快递，感觉今天应该是无法到了，很抱歉。但是，无论任何时候都希望你开心。</span>
+                <span class="text">其实我在赌，赌你是否在开封。 如果你能看到这封信，说明你很秀，能留在开封实习。</span>
+                <span class="text">好好学习，好好考研!</span>
+                <span class="tips">如需要更换图片,请将图片发送至邮箱：lazykids520@gmail.com</span>
+              </div>
 				  </div>
 				</cube-slide-item>
 			  </cube-slide>
@@ -324,6 +330,34 @@ import { setTimeout } from 'timers';
         }
       }
     }
+    .introduce {
+      color: #fff;
+      width: 100%;
+      height: 100%;
+      padding-top: 20px;
+      box-sizing: border-box;
+      padding-left: 20px;
+      padding-right: 20px;
+      text-align: left;
+      position: relative;
+      h3 {
+        padding-bottom: 10px;
+        text-align: center;
+      }
+      .text {
+        font-size: 14px;
+        white-space: normal;
+      }
+      .tips {
+        display: block;
+        width: 100%;
+        height: auto;
+        font-size: 12px;
+        white-space: normal;
+        position: absolute;
+        bottom: 40px;
+      }
+    }
     .toolBox {
       width: 100%;
       height: 110px;
@@ -360,8 +394,8 @@ import { setTimeout } from 'timers';
           line-height: 50px;
           color: #fff;
           font-size: 18px;
-          &.active{
-            color:red;
+          &.active {
+            color: red;
           }
         }
         .controlBox {
